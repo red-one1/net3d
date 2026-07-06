@@ -9,7 +9,10 @@ services:
   net3d:
     build: .
     ports:
-      - "${NET3D_PORT:-8080}:8080"
+      - "127.0.0.1:${NET3D_PORT:-8082}:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "netbox-ltss.australiaeast.cloudapp.azure.com:host-gateway"
     environment:
       NETBOX_URL: ${NETBOX_URL:?set NETBOX_URL in .env (see .env.example)}
       NETBOX_TOKEN: ${NETBOX_TOKEN:?set NETBOX_TOKEN in .env (see .env.example)}
